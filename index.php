@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<?php
-//include 'assets/bootsrap/css/bootstrap.css';
-?>
+
 <html>
     <head>
         <meta charset="utf-8">
@@ -34,11 +32,21 @@
     <![endif]-->
         
     </head>
+    
+    <?php
+if(isset($_POST['dateDebut'])){
+    $dateDebut = $_POST['dateDebut'];
+    echo $dateDebut;
+} else {
+    echo 'Bonjour';
+} ?>
+
+    
     <body>
         <header>
         <div class="header-content">
             <div class="header-content-inner">
-                <h1>Générateur automatique de PDF</h1>
+                <h1>Generateur de PDF</h1>
                 <hr>
                 <p>Optimisation de la procédure qu'est la demande d'autorisation d'absence !</p>
                 <a href="#about" class="btn btn-primary btn-xl page-scroll">J'essaie !</a>
@@ -51,13 +59,13 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     
-                        <form method="post"> 
+                        <form method="post" action="index.php"> 
                         <h2 class="section-heading">Formulaire</h2>
                         <hr class="light">
                         
                         <div class="col-lg-6 col-md-6 text-center">
                             <p class="text-faded">Date de début</p>
-                            <input type="text" class="form-control" id="dateDebut"/><p></br>
+                            <input type="text" class="form-control" id="dateDebut" name="dateDebut" /><p></br>
                         </div>
                         
                         <div class="col-lg-6 col-md-6 text-center">
@@ -76,7 +84,7 @@
                         </div>
                         
                         <div class="col-lg-6 col-lg-offset-3 text-center">
-                            <button type="submit" class="btn btn-default btn-xl"><a href="#">Valider !</a></button>
+                            <button type="submit" class="btn btn-default btn-xl"><a>Valider !</a></button>
                         </div>
                         
                     </form>
