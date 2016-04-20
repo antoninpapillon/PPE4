@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-    <title>Générateur PDF</title>
+    <title>Index</title>
     
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="assets/bootsrap/css/bootstrap.min.css" type="text/css">
@@ -34,27 +34,28 @@
     </head>
     
     <?php
-if(isset($_POST['dateDebut'])){
-    $dateDebut = $_POST['dateDebut'];
-    echo $dateDebut;
-} else {
-    echo 'Bonjour';
-} ?>
+//if(isset($_POST['dateDebut'])){
+//    $dateDebut = $_POST['dateDebut'];
+//    echo $dateDebut;
+//} else {
+//    echo 'Bonjour';
+//} ?>
 
     
     <body>
         <header>
         <div class="header-content">
             <div class="header-content-inner">
-                <h1>Generateur de PDF</h1>
+                <h1>Index</h1>
                 <hr>
-                <p>Optimisation de la procédure qu'est la demande d'autorisation d'absence !</p>
-                <a href="#about" class="btn btn-primary btn-xl page-scroll">J'essaie !</a>
+                <p>Plateforme interne de l'entreprise</p>
+                <a href="pdf.php" class="btn btn-primary btn-xl page-scroll">Fiche d'autorisation d'absence</a><br><br><br>
+                <a href="pdf.php" class="btn btn-primary btn-xl page-scroll">Liste des autorisation (responsable seulement)</a>
             </div>
         </div>
         </header>
         
-        <section class="bg-primary" id="about">
+<!--        <section class="bg-primary" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -91,7 +92,7 @@ if(isset($_POST['dateDebut'])){
                 </div>
             </div>
         </div>
-        </section>
+        </section>-->
         
         <!-- jQuery -->
     <script src="assets/bootsrap/js/jquery.js"></script>
