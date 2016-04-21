@@ -1,5 +1,7 @@
 <?php
 
+require('connexion.php');
+
 if (isset($_SERVER['REQUEST_URI'])) {
     $generate = isset($_GET['make_pdf']);
     $nom = isset($_GET['nom']) ? $_GET['nom'] : '';
@@ -12,6 +14,50 @@ if (isset($_SERVER['REQUEST_URI'])) {
     $nom = '';
 }
 
+$mail = 'antonin.papillon@bts-malraux.net';
+
+//Prévention des éventuels problème lié aux retours à la ligne selon le serveur.
+if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail))
+{
+	$passage_ligne = "\r\n";
+}
+else
+{
+	$passage_ligne = "\n";
+}
+
+$message_txt = "TEST MICRO UN DEUX TROIS";
+
+$boundary = "-----=".md5(rand());
+
+$sujet = "Hey mon ami !";
+
+$header = "From: \"AUTO_PDF\"<antonin.papillon@bts-malraux.net>".$passage_ligne;
+$header .= "Reply-to: \"AUTO_PDF\" <antonin.papillon@bts-malraux.net>".$passage_ligne;
+$header .= "MIME-Version: 1.0".$passage_ligne;
+$header.= "Content-Type: multipart/alternative;".$passage_ligne." boundary=\"$boundary\"".$passage_ligne;
+
+$message = $passage_ligne."--".$boundary.$passage_ligne;
+
+$message.= "Content-Type: text/plain; charset=\"ISO-8859-1\"".$passage_ligne;
+$message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
+$message.= $passage_ligne.$message_txt.$passage_ligne;
+
+$message.= $passage_ligne."--".$boundary.$passage_ligne;
+
+$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
+$message.= $passage_ligne."--".$boundary."--".$passage_ligne;
+
+//mail($mail,$sujet,$message,$header);
+
+//Préparation de la requête SQL
+$req = $bdd->prepare('INSERT INTO autorisation(nomSal, prenomSal, dateDebut, dateFin, motif) '
+        . 'VALUES(:nomSal, :prenomSal, :dateDebut, :dateFin, :motif)') 
+        or exit(print_r($bdd->errorInfo()));
+
+
+
+//Ce qui va être affiché dans le PDF
 $pdf = 
 '<style>
     h1 {
@@ -63,6 +109,14 @@ $pdf =
 ';
 
 if ($generate) {
+    //Exécution de la requête SQL
+$req->execute(array(
+    'nomSal' => $nom,
+    'prenomSal' => $prenom,
+    'dateDebut' => $dateDebut,
+    'dateFin' => $dateFin,
+    'motif' => $motif
+));
     ob_start();
 } 
 else {
