@@ -50,7 +50,7 @@
                 <hr>
                 <p>Plateforme interne de l'entreprise</p>
                 <a href="pdf.php" class="btn btn-primary btn-xl page-scroll">Fiche d'autorisation d'absence</a><br><br><br>
-                <a href="pdf.php" class="btn btn-primary btn-xl page-scroll">Liste des autorisation (responsable seulement)</a>
+                <a href="liste.php" class="btn btn-primary btn-xl page-scroll">Liste des autorisation (responsable seulement)</a>
             </div>
         </div>
         </header>

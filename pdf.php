@@ -91,7 +91,7 @@ else {
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-        <title>Exemple d'auto génération de PDF</title>
+        <title>Génération PDF</title>
             
         <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="assets/bootsrap/css/bootstrap.min.css" type="text/css">
@@ -115,6 +115,8 @@ else {
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
+                    
+                    <a href="index.php" class="btn btn-primary btn-xl page-scroll">RETOUR ACCEUIL</a><br><br><br>
                     
                     <form method="get" action="">
                         <input type="hidden" name="make_pdf" value="">
@@ -147,10 +149,9 @@ else {
                         </div>
                         
                         <div class="col-lg-6 col-lg-offset-3 text-center">
-                            <input type="submit" value="Generer le PDF" class="btn btn-default btn-xl">
+                            <input type="submit" value="Generer le PDF" class="btn btn-primary btn-xl page-scroll">
                         </div>
                         
-                            
 <!--                        <input type="hidden" name="make_pdf" value="">
                         Ton nom : <input type="text" name="nom" value="">
                         Prénom : <input type="text" name="prenom" value="">
@@ -162,10 +163,12 @@ else {
                         <br><br>
                         <input type="submit" value="Generer le PDF" >-->
                     </form>
+                    
                 </div>
             </div>
-        </div>
+        </div> 
     </section>
+
         
     <script src="assets/bootsrap/js/jquery.js"></script>
         
