@@ -1,24 +1,3 @@
-<?php
-    
-require('connexion.php');
-    
-if (isset($_SERVER['REQUEST_URI'])) {
-    $idAuto = isset($_GET['idAuto']) ? $_GET['idAuto'] : '';
-} else {
-}
-    
-//Préparation de la requête SQL
-$req = $bdd->prepare('UPDATE autorisation SET verif = 1 WHERE id='.$idAuto.'') 
-        or exit(print_r($bdd->errorInfo()));
-
-if ($idAuto) {
-    
-    //Exécution de la requête SQL
-$req->execute();
-} 
-
-else {
-?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -40,9 +19,6 @@ else {
         <link rel="stylesheet" href="assets/bootsrap/css/creative.css" type="text/css">
     </head>
     <body>
-<?php
-}
-?>
     <section class="bg-primary" id="about">
         <div class="container">
             <div class="row">
@@ -65,7 +41,7 @@ else {
 require 'connexion.php';
 
 $liste = $bdd->query('SELECT * FROM autorisation');
-$idbdd = $bdd->query('SELECT id FROM autorisation');
+$idbdd = $bdd->query('SELECT id FROM autorisation WHERE verif = 0');
 
 while ($donnees = $liste->fetch())
 {
@@ -77,20 +53,19 @@ while ($donnees = $liste->fetch())
     echo "<td> $donnees[dateDebut] </td>";
     echo "<td> $donnees[dateFin] </td>";
     echo "<td> $donnees[motif] </td>";
-    echo "<td> $donnees[verif] </td>";
+    echo "<td> " . ($donnees['verif'] == 0 ? "en attente":"validée"). "</td>";
     echo "</tr>";
 }
 $liste->closeCursor();
 ?>
         </table> 
-                    <form method="get" action="message.php">
+                    <form method="post" action="traitement_validation_autorisation.php">
                         
                     <select name="idAuto" class="form-control">
                     <?php while ($data = $idbdd->fetch()) { ?>
                     <option value="<?php echo $data['id'] ?>"><?php echo $data['id'] ?></option> <?php } ?>
                     </select>
                         <br><br>
-                        <h4> Si la colonne "validation" est à 0 c'est que la demande n'est pas acceptée. </h4>
                         <h4> Pour valider une autorisation, sélectionnez son ID dans la liste déroulante ci-dessus.</h4>
                         <h4> Puis appuyez sur le bouton "Valider".</h4>
                         <br><br>
@@ -98,10 +73,6 @@ $liste->closeCursor();
                         <input type="submit" value="Valider" class="btn btn-primary btn-xl page-scroll">
                     </div>                       
                     </form>
-                    
-                    <?php
-                    echo $idAuto;
-                    ?>
                 </div>
             </div> 
         </div>

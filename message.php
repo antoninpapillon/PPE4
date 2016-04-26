@@ -1,5 +1,8 @@
+<?php
+session_start();
+if (isset($_SESSION['titre_message']) && isset($_SESSION['description_message'])) {
+?>
 <!DOCTYPE html>
-
 <html>
     <head>
         <meta charset="utf-8">
@@ -32,23 +35,14 @@
     <![endif]-->
         
     </head>
-    
-    <?php
-//if(isset($_POST['dateDebut'])){
-//    $dateDebut = $_POST['dateDebut'];
-//    echo $dateDebut;
-//} else {
-//    echo 'Bonjour';
-//} ?>
 
-    
     <body>
         <header>
         <div class="header-content">
             <div class="header-content-inner">
-                <h1>Autorisation validée !</h1>
+                <h1><?php echo $_SESSION['titre_message']; ?></h1>
                 <hr>
-                <p>Un email à été envoyé, la version papier va arriver.</p>
+                <p><?php echo $_SESSION['description_message']; ?></p>
                 <a href="index.php" class="btn btn-primary btn-xl page-scroll">Retour Acceuil</a><br><br><br>
                 <a href="liste.php" class="btn btn-primary btn-xl page-scroll">Retour Liste</a>
             </div>
@@ -71,3 +65,8 @@
 
     </body>
 </html>
+<?php 
+}
+ else {
+    header("Location: index.php");
+}?>
