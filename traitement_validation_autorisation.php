@@ -7,6 +7,18 @@ function Messager($titre, $description) {
     $_SESSION['titre_message'] = $titre;
     $_SESSION['description_message'] = $description;
     header("Location: message.php");
+    
+     $to      = 'salarieppe4@yopmail.com';
+     $subject = 'Votre demande d\'autorisation d\'absence';
+     $message = 'Bonjour !
+         Je vous informe que votre demande d\'autorisation d\'absence à été validée.
+         Vous pouvez maintenant imprimer et apporter votre demande en version papier à votre supérieur.
+         
+         Bonne journée';
+     $headers = 'From: no-reply@fyctive.com' . "\r\n" .
+     'X-Mailer: PHP/' . phpversion();
+
+     mail($to, $subject, $message, $headers);
 }
 
 if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
