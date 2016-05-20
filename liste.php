@@ -24,7 +24,13 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <a href="index.php" class="btn btn-primary btn-xl page-scroll">RETOUR ACCEUIL</a><br><br><br>
-        
+       
+ <?php
+ require 'connexion.php';
+ $search = $bdd->query('SELECT * FROM autorisation WHERE verif = 0'); 
+ if($search->fetch()) {
+ ?>
+                    
         <TABLE BORDER="1" class="table">
             <h2>Liste des autorisations</h2>
             <tr>
@@ -38,11 +44,9 @@
             </tr>
             
 <?php
-require 'connexion.php';
-
 $liste = $bdd->query('SELECT * FROM autorisation');
 $idbdd = $bdd->query('SELECT id FROM autorisation WHERE verif = 0');
-
+    
 while ($donnees = $liste->fetch())
 {
     //On affiche les données dans le tableau
@@ -77,6 +81,13 @@ $liste->closeCursor();
             </div> 
         </div>
         </section>
+    <?php } 
+    
+    else {
+        ?>
+    <h4>Il n'y a pas de nouvelles demandes.</h4><?php
+    }
+?>
         
     <script src="assets/bootsrap/js/jquery.js"></script>
         
@@ -93,4 +104,4 @@ $liste->closeCursor();
         
 </body>
 </html>
-    
+ 
