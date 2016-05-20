@@ -3,12 +3,12 @@
 require('connexion.php');
     
 if (isset($_SERVER['REQUEST_URI'])) {
-    $generate = isset($_GET['make_pdf']);
-    $nom = isset($_GET['nom']) ? $_GET['nom'] : '';
-    $prenom = isset($_GET['prenom']) ? $_GET['prenom'] : '';
-    $dateDebut = isset($_GET['dateDebut']) ? $_GET['dateDebut'] : '';
-    $dateFin = isset($_GET['dateFin']) ? $_GET['dateFin'] : '';
-    $motif = isset($_GET['motif']) ? $_GET['motif'] : '';
+    $generate = isset($_POST['make_pdf']);
+    $nom = isset($_POST['nom']) ? $_POST['nom'] : '';
+    $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : '';
+    $dateDebut = isset($_POST['dateDebut']) ? $_POST['dateDebut'] : '';
+    $dateFin = isset($_POST['dateFin']) ? $_POST['dateFin'] : '';
+    $motif = isset($_POST['motif']) ? $_POST['motif'] : '';
 } else {
     $generate = true;
     $nom = '';
@@ -82,7 +82,18 @@ $req->execute(array(
     'dateFin' => $dateFin,
     'motif' => $motif
 ));
-    
+    $to      = 'responsableppe4@yopmail.com';
+     $subject = 'Nouvelle demande d\'autorisation d\'absence';
+     $message = 'Bonjour !
+         Je vous informe qu\une nouvelle demande d\'autorisation d\'absence a été faite..
+         Vous pouvez allez la valider en allant à cette adresse : 172.16.99.1/~a.papillon/liste.php .
+         
+         Bonne journée';
+     $headers = 'From: no-reply@fyctive.com' . "\r\n" .
+     'X-Mailer: PHP/' . phpversion();
+
+     mail($to, $subject, $message, $headers);
+	 
     ob_start();
 } 
 else {
@@ -118,7 +129,7 @@ else {
                     
                     <a href="index.php" class="btn btn-primary btn-xl page-scroll">RETOUR ACCEUIL</a><br><br><br>
                     
-                    <form method="get" action="">
+                    <form method="post" action="">
                         <input type="hidden" name="make_pdf" value="">
                         <h2 class="section-heading">Formulaire</h2>
                         <hr class="light">
